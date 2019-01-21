@@ -5,9 +5,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
-RUN ls -latrh /app/static
-RUN ls -latrh /
-
 
 # production stage
 FROM nginx:stable-alpine as production-stage
