@@ -10,17 +10,20 @@
         <tr class="statusTableSubHeader">
           <th>Check</th>
           <th>Results</th>
-          <th>Last check</th>
+          <th>Details</th>
         </tr>
         <tr v-for="(chk, k) in job" :key="k">
-          <td class="checkHeader">{{ k }}</td>
+          <td class="checkHeader">{{ k }}
+          </td>
           <td>
             <span  :title="item.name + ' - ' + item.start_time" id="components" v-for="item in chk" :key="item.id">
                 <img :class=item.status width="10" height="10" h-space="5" v-bind:src="'/static/' + item.status + '.png'" >
             </span>
           </td>
           <td class="detailsColumHeader">
-            {{ chk[Object.keys(chk).length - 1].start_time }} - {{ chk[Object.keys(chk).length - 1].status }}
+            <span class="details"><strong>namespace: </strong>{{ chk[0].namespace }}</span><br>
+            <strong>last check: </strong>{{ chk[Object.keys(chk).length - 1].start_time }}<br>
+            <strong>status: </strong>{{ chk[Object.keys(chk).length - 1].status }}
           </td>
         </tr>
       </table>

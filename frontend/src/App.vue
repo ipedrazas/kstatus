@@ -84,4 +84,11 @@ table, th, td{
 .header{
   font-size: 3em;
 }
+.details{
+  font-size: large
+}
+td{
+  text-align: left;
+  padding-left: 15px;
+}
 </style>
