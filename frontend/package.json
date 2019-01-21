@@ -1,14 +1,14 @@
 {
-  "name": "frontend",
+  "name": "kstatus-ui",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A Status page system for Kubernetes",
   "author": "Ivan Pedrazas <ipedrazas@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build":  "webpack --config build/webpack.prod.conf.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

@@ -26,13 +26,16 @@ spec:
   {{- end }}
 {{- end }}
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ . | quote }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: {{ $ingressPath }}
+          - path: /
             backend:
-              serviceName: {{ $fullName }}
+              serviceName: "{{ include "kstatus.fullname" . }}-ui"
               servicePort: http
-  {{- end }}
+          - path: /api
+            backend:
+              serviceName: "{{ include "kstatus.fullname" . }}-api"
+              servicePort: http
+  
 {{- end }}

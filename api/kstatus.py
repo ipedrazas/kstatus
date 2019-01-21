@@ -19,6 +19,10 @@ def get_config():
         config.load_kube_config()
     return config
 
+@app.route('/healthz')
+def healthz():
+    return "healthy"
+
 
 @app.route('/')
 def index():

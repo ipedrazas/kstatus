@@ -1,12 +1,12 @@
 FROM python:3.7-alpine
 
-RUN adduser -D kstatus
+RUN adduser -D flask
 RUN pip install virtualenv --upgrade
 
-WORKDIR /home/kstatus/app
+WORKDIR /home/flask/app
 
-COPY . /home/kstatus/app
-COPY kubeconfig /home/kstatus/.kube/config
+COPY . /home/flask/app
+# COPY kubeconfig /home/kstatus/.kube/config
 	
 RUN set -e; \
 	apk add --no-cache --virtual .build-deps \
@@ -19,10 +19,10 @@ RUN set -e; \
 	pip install -r requirements.txt; \
 	apk del .build-deps;
 
-RUN chown -R kstatus:kstatus ./
-USER kstatus
+RUN chown -R flask:flask ./
+USER flask
 
 EXPOSE 5000
-ENV FLASK_APP kstatus.py
+ENV FLASK_APP app.py
 
 CMD ["flask", "run", "--host=0.0.0.0"]

@@ -1,28 +1,29 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ include "kstatus.fullname" . }}
+  name: "{{ include "kstatus.fullname" . }}-ui"
   labels:
-    app: {{ include "kstatus.name" . }}
+    app: "{{ include "kstatus.name" . }}-ui"
     chart: {{ include "kstatus.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    component: {{ include "kstatus.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "kstatus.name" . }}
+      app: "{{ include "kstatus.name" . }}-ui"
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "kstatus.name" . }}
+        app: "{{ include "kstatus.name" . }}-ui"
         release: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.ui.repository }}:{{ .Values.ui.tag }}"
+          imagePullPolicy: {{ .Values.api.pullPolicy }}
           ports:
             - name: http
               containerPort: 80

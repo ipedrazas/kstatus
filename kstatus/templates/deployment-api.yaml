@@ -1,0 +1,58 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: "{{ include "kstatus.fullname" . }}-api"
+  labels:
+    app: "{{ include "kstatus.name" . }}-api"
+    chart: {{ include "kstatus.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: {{ include "kstatus.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: "{{ include "kstatus.name" . }}-api"
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: "{{ include "kstatus.name" . }}-api"
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: {{ .Values.rbac.sa }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.api.repository }}:{{ .Values.api.tag }}"
+          imagePullPolicy: {{ .Values.api.pullPolicy }}
+          env:
+            - name: CLUSTER
+              value: {{ .Values.cluster }}
+            - name: ENV
+              value: {{ .Values.env }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.api.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.api.service.port }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.api.service.port }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

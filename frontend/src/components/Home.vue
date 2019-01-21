@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     getJobs () {
-      const path = `http://localhost:5000/api/jobs`
+      const path = process.env.ROOT_API + `/jobs`
       axios.get(path)
         .then(response => {
           console.log(response.data.jobs)
@@ -52,7 +52,7 @@ export default {
         })
     },
     getMetadata () {
-      const path = `http://localhost:5000/api/metadata`
+      const path = process.env.ROOT_API + `/metadata`
       axios.get(path)
         .then(response => {
           console.log(response.data.meta)
