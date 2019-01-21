@@ -47,7 +47,7 @@ def jobs():
     get_config()
     v1_job = client.BatchV1Api()
 
-    ret = v1_job.list_namespaced_job("status")
+    ret = v1_job.list_job_for_all_namespaces(label_selector='target=kstatus')
     jobs = {}
 
     for i in ret.items:
@@ -62,6 +62,9 @@ def jobs():
             res['name'] = i.metadata.name
             res['start_time'] = i.status.start_time
             res['id'] = i.metadata.uid
+            res['namespace'] = i.metadata.namespace
+            if 'target' in labels:
+                res['target'] = labels['target']
             res['group'] = labels['group']
             if 'run' in labels:
                 res['run'] = labels['run']
