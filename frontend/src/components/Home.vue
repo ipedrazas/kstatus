@@ -28,6 +28,7 @@
         </tr>
       </table>
     </div>
+    <div><img src="/static/littleboat.png"></div>
   </div>
 </template>
 
