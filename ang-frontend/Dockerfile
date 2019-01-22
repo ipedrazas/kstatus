@@ -6,8 +6,6 @@ RUN npm install
 COPY . .
 RUN npm install -g @angular/cli
 RUN ng build --prod
-RUN ls -latrh
-RUN ls -lstarh /
 
 # production stage
 FROM nginx:stable-alpine as production-stage
