@@ -1,0 +1,8 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<app-status-header [meta]="meta"></app-status-header>
+
+<app-service-status *ngFor="let server of jobs | keyvalue" [name]="server.key" [responses]="server.value"></app-service-status>
+
+
+<!-- <router-outlet></router-outlet> -->

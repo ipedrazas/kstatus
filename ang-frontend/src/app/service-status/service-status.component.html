@@ -1,0 +1,25 @@
+<div id="jobs">
+  <table class="statusTable">
+    <tr class="statusTableHeader"><th colspan="3">{{ name }}</th></tr>
+    <tr class="statusTableSubHeader"><th>Check</th> <th>Results</th> <th>Details</th></tr>
+    <tr *ngFor="let response of responses | keyvalue">
+      <td class="checkHeader">{{ response.key }}</td>
+      <td>
+        <span *ngFor="let statcheck of response.value" title="{{ statcheck.name }} - {{ statcheck.start_time }}" id="components">
+
+          <img *ngIf="statcheck.status=='failed'" src="assets/img/failed.png" class="failed">
+          <img *ngIf="statcheck.status=='succeded'"src="assets/img/succeded.png" class="succeded">
+        </span>
+
+      </td>
+      <td class="detailsColumHeader">
+        <span class="details">
+          <strong>namespace: </strong>{{ response.value[response.value.length-1].namespace }}
+        </span>
+        <br>
+        <strong>last check: </strong>{{ response.value[response.value.length-1].start_time }}<br> <strong>status: </strong>{{ response.value[response.value.length-1].status }}
+      </td>
+    </tr>
+  </table>
+
+</div>
