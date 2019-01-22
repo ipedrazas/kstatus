@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://status.alpha03.msf.ooa.sttgts.com/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": "/api"
+    }
+  }
+}
