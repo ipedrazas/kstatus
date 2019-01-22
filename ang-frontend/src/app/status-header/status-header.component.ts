@@ -9,8 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class StatusHeaderComponent implements OnInit {
 
   constructor() { }
+  @Input() meta;
 
   ngOnInit() {
   }
-  @Input() meta;
 }
