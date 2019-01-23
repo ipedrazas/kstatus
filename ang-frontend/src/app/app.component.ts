@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.startPoll(5000);
+    this.startPoll(10000);
   }
 
   ngOnDestroy(): void {
