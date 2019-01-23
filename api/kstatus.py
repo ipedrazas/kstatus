@@ -65,9 +65,9 @@ def jobs():
             res['namespace'] = i.metadata.namespace
             if 'target' in labels:
                 res['target'] = labels['target']
-            res['group'] = labels['group']
+            res['group'] = labels['group'].lower()
             if 'run' in labels:
-                res['run'] = labels['run']
+                res['run'] = labels['run'].lower()
 
             if i.status.succeeded: 
                 res['status'] = 'succeded'
