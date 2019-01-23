@@ -1,3 +1,5 @@
 <mat-toolbar color="primary">
-  {{ meta?.cluster}} <span>{{ meta?.env}} cluster</span>
+  {{ meta?.cluster}}
+  <span class="env">{{ meta?.env}} cluster</span>
+  <span class="date">Last updated: {{ lastUpdated }}</span>
 </mat-toolbar>

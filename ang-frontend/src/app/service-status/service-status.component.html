@@ -1,5 +1,5 @@
-<mat-expansion-panel expanded>
-  <mat-expansion-panel-header>
+<mat-expansion-panel [expanded]="isOpen">
+  <mat-expansion-panel-header (click)="togglePanel(name, !isOpen)">
     <mat-panel-title>
       {{ name }}
     </mat-panel-title>

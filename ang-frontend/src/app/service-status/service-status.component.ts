@@ -27,6 +27,8 @@ export class ServiceStatusComponent implements OnInit {
 
   @Input() name;
   @Input() responses: IStatuses;
+  @Input() openPanels: Array<string>;
+  @Input() togglePanel: any;
 
   checks: Array<{
     key: string,
@@ -34,6 +36,7 @@ export class ServiceStatusComponent implements OnInit {
   }>;
 
   displayedColumns: string[] = [ 'check', 'results', 'details' ];
+  isOpen: boolean;
 
   constructor() { }
 
@@ -42,6 +45,7 @@ export class ServiceStatusComponent implements OnInit {
       key: key,
       values: this.responses[key]
     }));
+    this.isOpen = this.openPanels.indexOf(this.name) !== -1;
   }
 
 }

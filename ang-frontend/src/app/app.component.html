@@ -1,8 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<app-status-header [meta]="meta"></app-status-header>
+<app-status-header [meta]="meta" [lastUpdated]="kstatusApiService.lastUpdated"></app-status-header>
 
-<app-service-status *ngFor="let server of jobs | keyvalue" [name]="server.key" [responses]="server.value"></app-service-status>
+<app-service-status *ngFor="let server of jobs | keyvalue" [name]="server.key" [responses]="server.value" [openPanels]="kstatusApiService.openPanels" [togglePanel]="kstatusApiService.togglePanel"></app-service-status>
 
 <div class="footer-boat"><img src="assets/img/littleboat.png"></div>
 

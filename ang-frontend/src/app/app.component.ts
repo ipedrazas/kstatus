@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { KstatusApiService } from 'src/app/kstatus-api.service';
-import { timer, Observable, Subscription } from 'rxjs';
+import { timer } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -35,8 +36,13 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.kstatusApiService.jobs().subscribe( myValue => {
+      if (!this.jobs) {
+        Object.keys(myValue['jobs']).forEach(key => this.kstatusApiService.togglePanel(key, true));
+      }
       this.jobs = myValue['jobs'];
     });
+
+    this.kstatusApiService.lastUpdated = moment().format('MMMM Do YYYY, h:mm:ss a');
 
   }
 
