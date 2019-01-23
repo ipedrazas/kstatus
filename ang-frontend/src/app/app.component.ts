@@ -14,7 +14,11 @@ export class AppComponent implements OnInit, OnDestroy {
   jobs: Map<string, any>;
   pollSubscription: any;
 
-  constructor( private kstatusApiService: KstatusApiService) {
+  constructor(private _kstatusApiService: KstatusApiService) {
+  }
+
+  get kstatusApiService(): KstatusApiService {
+    return this._kstatusApiService;
   }
 
   ngOnInit() {
@@ -31,18 +35,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getDataSubscriptions(): void {
 
-    this.kstatusApiService.metadata().subscribe( myValue => {
+    this._kstatusApiService.metadata().subscribe( myValue => {
       this.meta = myValue['meta'];
     });
 
-    this.kstatusApiService.jobs().subscribe( myValue => {
+    this._kstatusApiService.jobs().subscribe( myValue => {
       if (!this.jobs) {
-        Object.keys(myValue['jobs']).forEach(key => this.kstatusApiService.togglePanel(key, true));
+        Object.keys(myValue['jobs']).forEach(key => this._kstatusApiService.togglePanel(key, true));
       }
       this.jobs = myValue['jobs'];
     });
 
-    this.kstatusApiService.lastUpdated = moment().format('MMMM Do YYYY, h:mm:ss a');
+    this._kstatusApiService.lastUpdated = moment().format('MMMM Do YYYY, h:mm:ss a');
 
   }
 
