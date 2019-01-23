@@ -10,6 +10,7 @@ export class StatusHeaderComponent implements OnInit {
 
   constructor() { }
   @Input() meta;
+  @Input() lastUpdated: string;
 
   ngOnInit() {
   }
