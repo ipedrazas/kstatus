@@ -6,7 +6,6 @@ replicaCount: 1
 minAvailable: 2
 cluster: alpha03
 env: development 
-namespace: status
 
 ui:
   repository: ipedrazas/kstatus-ui
