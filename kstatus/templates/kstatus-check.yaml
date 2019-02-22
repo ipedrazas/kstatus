@@ -1,0 +1,36 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: "{{ include "kstatus.fullname" . }}-check"
+  labels:
+    run: "website-responding"
+    app: "{{ include "kstatus.fullname" . }}-check"
+    group: {{ include "kstatus.fullname" . }}
+    target: kstatus
+    chart: {{ include "kstatus.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: {{ include "kstatus.name" . }}
+spec:
+  concurrencyPolicy: Forbid
+  schedule: "*/5 * * * *"
+  successfulJobsHistoryLimit: 20
+  failedJobsHistoryLimit: 20
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 300 # 5min
+      template:
+        metadata: 
+          labels:
+            target: kstatus
+            run: "website-responding"
+            app: "{{ include "kstatus.fullname" . }}-check"
+            group: {{ include "kstatus.fullname" . }}
+        spec:
+          containers:
+            - name: curl
+              image: appropriate/curl
+              command: ["/bin/sh"]
+              args: ["-c", "curl -s -o /dev/null -I -w \"%{http_code}\" http://{{ include "kstatus.fullname" . }}-ui"]
+          restartPolicy: Never
