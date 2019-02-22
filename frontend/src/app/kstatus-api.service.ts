@@ -16,11 +16,11 @@ export class KstatusApiService {
   }
 
   metadata() {
-    return this.httpClient.get('/api/metadata');
+    return this.httpClient.get('http://localhost:5000/api/metadata');
   }
 
   jobs() {
-    return this.httpClient.get('/api/jobs');
+    return this.httpClient.get('http://localhost:5000/api/jobs');
   }
 
   togglePanel(id: string, open: boolean): void {

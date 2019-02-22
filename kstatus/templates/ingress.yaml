@@ -29,11 +29,11 @@ spec:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: /
+          - path: /*
             backend:
               serviceName: "{{ include "kstatus.fullname" . }}-ui"
               servicePort: http
-          - path: /api
+          - path: /api/*
             backend:
               serviceName: "{{ include "kstatus.fullname" . }}-api"
               servicePort: http
