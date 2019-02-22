@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, Response, render_template
+from flask import Flask, jsonify, request, Response
 from kubernetes import client, config, watch
 from flask_cors import CORS
 
@@ -19,6 +19,7 @@ def get_config():
         config.load_kube_config()
     return config
 
+
 @app.route('/healthz')
 def healthz():
     return "healthy"
@@ -26,13 +27,13 @@ def healthz():
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return "kstatus api"
 
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    return render_template("index.html")
+    return "kstatus api"
 
 
 @app.route('/api/metadata')
