@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://status.alpha03.msf.ooa.sttgts.com/",
+    "target": "https://status.127biscuits.com/",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
